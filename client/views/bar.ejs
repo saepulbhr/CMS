@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-10 offset-1">
+                    <div class="container-fluid">
+                        <canvas id="myChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    const api = `http://localhost:4000/api/data`
+
+    const bar = () => {
+        $.ajax({
+            url: api,
+            method: 'GET'
+        }).done(data => {
+            result(data)
+        })
+    }
+
+    $(document).ready(function(){
+        bar()
+    })
+
+
+    const result = (data) => {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.map(item=> item.letter),
+                datasets: [{
+                    label: 'Frequency',
+                    data: data.map(item=> item.frequency),
+                    backgroundColor: [
+                        'rgba(216, 27, 96, 0.6)',
+                        'rgba(3, 169, 244, 0.6)',
+                        'rgba(255, 152, 0, 0.6)',
+                        'rgba(29, 233, 182, 0.6)',
+                        'rgba(156, 39, 176, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(216, 27, 96, 1)',
+                        'rgba(3, 169, 244, 1)',
+                        'rgba(255, 152, 0, 1)',
+                        'rgba(29, 233, 182, 1)',
+                        'rgba(156, 39, 176, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Frequency',
+                    position: 'top',
+                    fontSize: 16,
+                    padding: 20
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+</script>
+
+</html>
