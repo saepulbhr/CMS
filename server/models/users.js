@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const usersSchema = new Schema({
     email: { type: String },
     password: { type: String },
-    retypepassword: { type: String },
+    fullname: {type: String},
     token: { type: String }
 });
 

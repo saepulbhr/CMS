@@ -37,8 +37,9 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form id="login-form" action="https://phpoll.com/login/process" method="post"
-                                    role="form" style="display: block;">
+                               
+                             <form id="login-form" action="https://phpoll.com/login/process" method="post"
+                                    role="form" style="display: block;" id="form-add">
                                     <div class="form-group">
                                         <input type="text" name="email" id="email" tabindex="1"
                                             class="form-control" placeholder="Email" value="">
@@ -56,19 +57,21 @@
                                         </div>
                                     </div>
                                 </form>
+
+
                                 <form id="register-form" action="https://phpoll.com/register/process" method="post"
-                                    role="form" style="display: none;">
+                                    role="form" style="display: none;" id="form-regis">
                                     
                                     <div class="form-group">
-                                        <input type="email" name="email" id="email" tabindex="1" class="form-control"
+                                        <input type="email" name="email" id="Remail" tabindex="1" class="form-control"
                                             placeholder="Email " value="">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" id="password" tabindex="2"
+                                        <input type="password" name="password" id="Rpassword" tabindex="2"
                                             class="form-control" placeholder="Password">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="confirm-password" id="confirm-password"
+                                        <input type="password" name="confirm-password" id="Rtypepassword"
                                             tabindex="2" class="form-control" placeholder="Confirm Password">
                                     </div>
                                     <div class="form-group">
@@ -81,6 +84,7 @@
                                         </div>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -93,16 +97,15 @@
 
 <script>
      
-    function login(){
-        $.ajax({
-            url: `http://localhost:4000/api/users/`,
-            method: 'POST',
-            data: {email:('#email').val(), password:('#password').val()}
-        })
-        .done(data =>{
-            
-        })
+    const api = `http://localhost:4000/api/users/`;
+
+    const login = () => {
+        let email = $('#email').val();
+        let password = $('#password').val();
+
+
     }
+
 
     $(function () {
         $('#login-form-link').click(function (e) {

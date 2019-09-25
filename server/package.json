@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "test": "mocha --timeout 10000"
+    "test": "mocha --timeout 10000",
+    "seed": "node ./seeds/data.js"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
@@ -22,20 +23,5 @@
     "chai-http": "^4.3.0",
     "mocha": "^6.2.0",
     "nodemon": "^1.19.2"
-  },
-  "main": "app.js",
-  "directories": {
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/saepulbhr/CMS.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/saepulbhr/CMS/issues"
-  },
-  "homepage": "https://github.com/saepulbhr/CMS#readme",
-  "description": ""
+  }
 }

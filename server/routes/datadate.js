@@ -59,7 +59,7 @@ router.post('/search', (req, res) => {
         })
     });
 
-    router.post('/add', (req, res) => {
+    router.post('/', (req, res) => {
         const { letter, frequency } = req.body;
         Datadate.create({
             letter: letter,

@@ -38,6 +38,11 @@ router.get('/pie', (err, res)=>{
 })
 
 
+router.get('/line', (err, res)=>{
+  res.render('line')
+})
+
+
 
 
 

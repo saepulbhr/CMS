@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-10 offset-1">
+                    <div class="container-fluid">
+                        <div id="chartContainer" style="height: 300px; width: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+<script>
+    const api = `http://localhost:4000/api/datadate`
+
+    const pie = () => {
+        $.ajax({
+            url: api,
+            method: 'GET'
+        }).done(data => {
+            result(data)
+        })
+    }
+
+    const result = (data) => {
+
+        var y = 0;
+        var data = [];
+        var dataSeries = { type: "line" };
+        var dataPoints = [];
+        for (var i = 0; i < data; i += 1) {
+            y += (Math.random() * 10 - 5);
+            dataPoints.push({
+                x: i - limit / 2,
+                y: y
+            });
+        }
+        dataSeries.dataPoints = dataPoints;
+        data.push(dataSeries);
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                zoomEnabled: true,
+                title: {
+                    text: "Try Zooming and Panning"
+                },
+                axisY: {
+                    includeZero: false
+                },
+                data: data  // random generator below
+            });
+            chart.render();
+
+        }
+    }
+</script>
+
+</html>
