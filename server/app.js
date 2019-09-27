@@ -13,7 +13,7 @@ var mapsRouter = require('./routes/maps');
 // connection mongoose
 var mongoose = require('mongoose');
 // mongoose.set('useFindAndModify', false);
-mongoose.connect('mongodb://localhost:27017/cmsdb', {useNewUrlParser: true, useFindAndModify: false})
+mongoose.connect('mongodb://localhost:27017/cmsdb', {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true})
 .then(()=>{console.log('')})
 .catch(()=>{console.log('')});
 // mongoose.connect('mongodb://localhost/CMS', {useNewUrlParser: true});

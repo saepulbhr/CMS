@@ -4,13 +4,13 @@ const secret = require('../helper/config');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+
 var jwt = require('jsonwebtoken');
 
 
 const userSchema = new Schema({
     email: String,
     password: String,
-    fullname: String,
     token: String
 });
 
@@ -27,7 +27,8 @@ userSchema.pre('save', function(next) {
   });
   
   userSchema.methods.comparePassword = function(plainPassword, done) {
-    bcrypt.compare(plainPassword, this.password).then(function(res) {
+    let user = this
+    bcrypt.compare(plainPassword, user.password).then(function(res) {
       done(res);
     });
   };
@@ -36,7 +37,7 @@ userSchema.pre('save', function(next) {
     let user = this;
     delete user.password;
     let token = jwt.sign({email: user.email}, secret.secret);
-    console.log(token);
+    
     return token;
   };
   

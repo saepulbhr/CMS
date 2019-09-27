@@ -9,18 +9,47 @@
 </head>
 
 <body>
-        <% include ./partials/header %>
+    <% include ./partials/header %>
     <div class="container mt-5">
         <div class="row">
             <div class="col col-md6 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h2>Welcome, Email</h2>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
+<script type="text/javascript">
+    let api = `http://localhost:4000/api/users`;
+
+    $(document).ready(function(){
+        auth(localStorage.getItem('token'));
+        head()
+    })
+    
+    function auth() {
+        $.ajax({
+            url: `${api}/check`,
+            method: "POST",
+            data: {
+                token: localStorage.getItem('token')
+            }
+        }).done((data) => {
+            if(!data.valid){
+                window.location = '/login'
+            }
+        })
+    }
+
+    function head () {
+        let card = `<h2>Welcome, ${localStorage.getItem('email')}</h2>`
+        $('.card-body').html(card)
+    }
+
+</script>
 
 </html>

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var auth = require('../middleware/auth')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,7 +11,7 @@ router.get('/login', (err, res) =>{
   res.render('login')
 });
 
-router.get('/home', (er, res)=>{
+router.get('/home', (err, res)=>{
   const path = 1;
   res.render('home', {title: 'Content management System',path})
 })
@@ -40,6 +41,10 @@ router.get('/pie', (err, res)=>{
 
 router.get('/line', (err, res)=>{
   res.render('line')
+})
+
+router.get('/map', (err, res)=>{
+  res.render('map')
 })
 
 
