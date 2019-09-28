@@ -64,36 +64,40 @@ router.post('/login', function (req, res, next) {
 });
 
 router.post('/check', (req, res) => {
-  const token = req.body.token;    function auth() {
+  const token = req.body.token; function auth() {
     $.ajax({
-        url: `${api}/check`,
-        method: "POST",
-        data: {
-            token: localStorage.getItem('token')
-        }
+      url: `${api}/check`,
+      method: "POST",
+      data: {
+        token: localStorage.getItem('token')
+      }
     }).done((data) => {
-        if(!data.valid){
-            window.location = '/login'
-        }
+      if (!data.valid) {
+        window.location = '/login'
+      }
     })
-}
+  }
   try {
     let data = Users.decodeToken(token);
-    if(data){
-      Users.findOne({email: data.email}, (err, data) => {
-        if(!data){
-          res.json({valid: false})
+    if (data) {
+      Users.findOne({ email: data.email }, (err, data) => {
+        if (!data) {
+          res.json({ valid: false })
         } else {
-          res.json({valid: true})
+          res.json({ valid: true })
         }
       })
-    }else {
-      res.json({valid: false})
+    } else {
+      res.json({ valid: false })
     }
   }
-  catch(err){
-    res.json({valid:false})
+  catch (err) {
+    res.json({ valid: false })
   }
 });
+
+router.post('/logout', (req, res) => {
+  
+})
 
 module.exports = router;

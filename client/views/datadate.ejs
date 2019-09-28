@@ -20,6 +20,18 @@
                 <button type="submit" class="btn btn-primary" id="btn-add"><i class="fa fa-plus "></i> Add</button>
             </div>
 
+            <div class="alert alert-primary" role="alert" style="display: none" id="add">
+                data have been added
+            </div>
+
+            <div class="alert alert-primary" role="alert" style="display: none" id="edit">
+                data have been update
+            </div>
+
+            <div class="alert alert-danger" role="alert" style="display: none" id="del">
+                data have been deleted
+            </div>
+
             <div id="div-add" class="panel panel-default mt-3 mb-3" style="display:none">
                 <div class="card" style="background-color: #CCC">
                     <div class="card-body">
@@ -88,15 +100,17 @@
 
     $(document).ready(function () {
         loadData();
-
+        auth(localStorage.getItem('token'));
         $('#form-add').submit((e) => {
             e.preventDefault();
             if ($('#id').val() == '') {
                 saveData();
                 $('#div-add').hide();
+                $('#add').show()
             } else {
                 editData()
                 $('#div-add').hide();
+                $('#edit').show()
             }
             $('#id').val('')
         })
@@ -151,6 +165,9 @@
         $.ajax({
             url: `${api}/${id}`,
             method: 'DELETE',
+            success: function(){
+                $('#del').show()
+            }
         }).done(res => {
             loadData()
         })
@@ -206,6 +223,20 @@
         $('#Sletter').val();
         findData();
     })
+
+    function auth() {
+        $.ajax({
+            url: `http://localhost:4000/api/users/check`,
+            method: "POST",
+            data: {
+                token: localStorage.getItem('token')
+            }
+        }).done((data) => {
+            if(!data.valid){
+                window.location = '/login'
+            }
+        })
+    }
 
 </script>
 
